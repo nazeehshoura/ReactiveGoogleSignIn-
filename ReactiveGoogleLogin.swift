@@ -2,7 +2,7 @@
 //  GIDSignIn+Rx.swift
 //
 //  Created by Nazih Shoura on 08/05/2017.
-//  Modified by Balazs Vadnai on 2018. 05. 09..
+//  Modified by Balazs Vadnai on 05/09/2018.
 //  Copyright © 2017 Nazih Shoura. All rights reserved.
 //
 
