@@ -38,13 +38,13 @@ public class RxGIDSignInDelegateProxy: DelegateProxy<GIDSignIn, GIDSignInDelegat
         super.init(parentObject: gidSignIn, delegateProxy: RxGIDSignInDelegateProxy.self)
     }
 
-    fileprivate var _gidGoogleUserSigninResult: ReplaySubject<GIDGoogleUser>?
+    fileprivate var _gidGoogleUserSigninResult: PublishSubject<GIDGoogleUser>?
 
-    internal var gidGoogleUserSigninResult: ReplaySubject<GIDGoogleUser> {
+    internal var gidGoogleUserSigninResult: PublishSubject<GIDGoogleUser> {
         if let subject = _gidGoogleUserSigninResult {
             return subject
         }
-        let subject = ReplaySubject<GIDGoogleUser>.create(bufferSize: 1)
+        let subject = PublishSubject<GIDGoogleUser>()
         _gidGoogleUserSigninResult = subject
         return subject
     }
