@@ -2,7 +2,7 @@
 //  GIDSignIn+Rx.swift
 //
 //  Created by Nazih Shoura on 08/05/2017.
-//  Modified by Balazs Vadnai on 05/09/2018.
+//  Modified by Balazs Vadnai on 2018. 05. 09..
 //  Copyright © 2017 Nazih Shoura. All rights reserved.
 //
 
@@ -38,13 +38,13 @@ public class RxGIDSignInDelegateProxy: DelegateProxy<GIDSignIn, GIDSignInDelegat
         super.init(parentObject: gidSignIn, delegateProxy: RxGIDSignInDelegateProxy.self)
     }
 
-    fileprivate var _gidGoogleUserSigninResult: PublishSubject<GIDGoogleUser>?
+    fileprivate var _gidGoogleUserSigninResult: ReplaySubject<GIDGoogleUser>?
 
-    internal var gidGoogleUserSigninResult: PublishSubject<GIDGoogleUser> {
+    internal var gidGoogleUserSigninResult: ReplaySubject<GIDGoogleUser> {
         if let subject = _gidGoogleUserSigninResult {
             return subject
         }
-        let subject = PublishSubject<GIDGoogleUser>()
+        let subject = ReplaySubject<GIDGoogleUser>.create(bufferSize: 1)
         _gidGoogleUserSigninResult = subject
         return subject
     }
