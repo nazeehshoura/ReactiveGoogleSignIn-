@@ -17,14 +17,11 @@ public class RxGIDSignInDelegateProxy: DelegateProxy<GIDSignIn, GIDSignInDelegat
 
     // MARK: delegate
     public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            if let subject = _gidGoogleUserSigninResult {
-                subject.on(.error(error))
-            }
-        }
-        if let user = user {
-            if let subject = _gidGoogleUserSigninResult {
+        if let subject = _gidGoogleUserSigninResult {
+            if let user = user {
                 subject.on(.next(user))
+            } else if let error = error {
+                subject.on(.error(error))
             }
         }
         self._forwardToDelegate?.sign(signIn, didSignInFor: user, withError: error)
@@ -94,5 +91,4 @@ extension GIDSignIn {
     public func createRxDelegateProxy() -> RxGIDSignInDelegateProxy {
         return RxGIDSignInDelegateProxy(gidSignIn: self)
     }
-
 }
